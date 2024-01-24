@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--===== CSS =====-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Login form style google</title>
+</head>
+
+<body>
+    <div class="l-form">
+        <form action="#" class="form">
+            <h1 class="form__title">Order Drink</h1>
+
+            <div class="form__div">
+                <input type="text" class="form__input" placeholder=" " id="name">
+                <label for="" class="form__label">Name</label>
+            </div>
+
+            <div class="form__div">
+                <input type="text" class="form__input" placeholder=" " id="drink">
+                <label for="" class="form__label">Drink/Requests</label>
+            </div>
+
+            <input type="submit" class="form__button" value="Order" id="order">
+        </form>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const order = document.getElementById('order')
+    order.addEventListener('click', () => {
+        const webhookUrl =
+            'https://discord.com/api/webhooks/1199549798668312656/JvJ4ZgPa36qaoQmAJM1QqVcndKm7vCsGx2J5q4g2hjwJyP-JEoeox-FawfUFqdghosSC';
+        const drink = document.getElementById('drink').value
+        const name = document.getElementById('name').value
+        const embedData = {
+            embeds: [{
+                title: 'Order',
+                description: 'New Order',
+                color: 32768, // Hex color for green, or you can use decimal color value
+                fields: [{
+                        name: '😀 Name',
+                        inline: true,
+                        value: name,
+                    },
+                    {
+                        name: '🍹 Drink',
+                        inline: true,
+                        value: drink,
+                    },
+                ],
+            }, ],
+        };
+
+        axios.post(webhookUrl, embedData)
+            .then(response => {
+                console.log('Webhook sent successfully');
+            })
+            .catch(error => {
+                console.error('Error sending webhook:', error);
+            });
+    })
+</script>
+
+</html>
